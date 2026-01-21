@@ -5,6 +5,7 @@
     {% assign card_body_col = '12' %}
 
     {% if post.image %}
+
     {% assign raw_src = post.image.path | default: post.image %}
 
     {%- capture src -%}
