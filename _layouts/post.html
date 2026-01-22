@@ -10,7 +10,6 @@ script_includes:
 ---
 
 <script>
-  console.log('update sidebar');
   let sidebar = document.querySelector('div.sidebar-bottom');
   let modeToggle = document.createElement('a');
   modeToggle.id = 'col-mode-toggle';
@@ -25,7 +24,6 @@ script_includes:
   if (ghLink) {
     ghLink.replaceWith(modeToggle);
   }
-  console.log(modeToggle);
 </script>
 
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
@@ -226,8 +224,6 @@ script_includes:
 <script type="module">
 
   import { isMobile, autoFloat, makeEntityPopups, wrapAdjacentEmbedsAsTabs, addActionLinks, init2col } from "{{ '/assets/js/main.js' | relative_url }}";
-
-  console.log('here');
 
   makeEntityPopups();
   wrapAdjacentEmbedsAsTabs();

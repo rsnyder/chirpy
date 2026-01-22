@@ -24,8 +24,6 @@ import "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace/cdn/components/tab
 import "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace/cdn/components/tab-panel/tab-panel.js";
 import "https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.2.0/scrollama.min.js";
 
-console.log('main.js');
-
 /* ---------------------------------------------
  * Environment / config
  * ------------------------------------------- */
