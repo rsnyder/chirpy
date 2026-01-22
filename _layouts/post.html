@@ -290,7 +290,6 @@ script_includes:
   import { init2col } from "{{ '/assets/js/2col.js' | relative_url }}";
   let mainWrapper = document.getElementById('main-wrapper');
   mainWrapper.classList.add('col1');
-  console.log(mainWrapper)
   document.getElementById('toggle').addEventListener('click', () => {
     if (mainWrapper.classList.contains('col2')) {
       mainWrapper.classList.remove('col2');
