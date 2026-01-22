@@ -227,6 +227,8 @@ script_includes:
 
   import { isMobile, autoFloat, makeEntityPopups, wrapAdjacentEmbedsAsTabs, addActionLinks, init2col } from "{{ '/assets/js/main.js' | relative_url }}";
 
+  console.log('here');
+
   makeEntityPopups();
   wrapAdjacentEmbedsAsTabs();
   addActionLinks();
@@ -245,5 +247,5 @@ script_includes:
       mainWrapper.classList.add('col2');
       init2col();
     }
-  })
+  });
 </script>
