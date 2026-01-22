@@ -23,7 +23,7 @@ const SELECTORS = {
   article: "article",
   header: "article > header",
   viewer: ".viewer",
-  step: ".post-content p.text",
+  step: ".col2 .post-content p",
 };
 
 const scroller = scrollama();
@@ -59,12 +59,14 @@ function setActive(el) {
  * - Use an element with class "right"
  */
 function findViewerSource(stepEl) {
-  let node = stepEl?.previousElementSibling || null;
+  let toMatch = ['IFRAME', 'SL-TAB-GROUP'];
 
+  let node = stepEl?.nextElementSibling;
+  if (node.nodeType === Node.ELEMENT_NODE && toMatch.includes(node.nodeName)) return node
+
+  node = stepEl?.previousElementSibling || null;
   while (node) {
-    const isIframe = node.nodeName === "IFRAME";
-    const isRight = node.classList?.contains("right");
-    if (isIframe || isRight) return node;
+    if (node.nodeType === Node.ELEMENT_NODE && toMatch.includes(node.nodeName)) return node
     node = node.previousElementSibling;
   }
   return null;
@@ -81,7 +83,10 @@ function renderViewerFrom(sourceEl) {
   if (sourceEl === lastSourceEl) return;
   lastSourceEl = sourceEl;
 
+
   const clone = sourceEl.cloneNode(true);
+  clone.removeAttribute('id');
+  clone.setAttribute('data-id', sourceEl.id);
 
   // Some nodes might not support querySelector; guard it.
   if (clone && clone.querySelector) {
@@ -139,6 +144,7 @@ function requestPositionUpdate() {
 
 function handleStepEnter(response) {
   const stepEl = response?.element;
+  console.log('handleStepEnter', stepEl)
   if (!stepEl) return;
 
   setActive(stepEl);
@@ -148,7 +154,8 @@ function handleStepEnter(response) {
   requestPositionUpdate();
 }
 
-function init2col() {
+export function init2col() {
+  console.log('init2col')
   els.article = qs(SELECTORS.article);
   els.header = qs(SELECTORS.header);
   els.viewer = qs(SELECTORS.viewer);
@@ -168,7 +175,7 @@ function init2col() {
   scroller
     .setup({
       step: SELECTORS.step,
-      offset: 0.05,
+      offset: 0.1,
       debug: false,
     })
     .onStepEnter(handleStepEnter);
@@ -178,8 +185,10 @@ function init2col() {
   window.addEventListener("load", requestPositionUpdate);
 }
 
+/*
 console.log(`isMobile=${isMobile}`);
 if (!isMobile) init2col();
 else {
   document.querySelectorAll('.shimmer').forEach(el => el.classList.remove("shimmer"))
 }
+*/

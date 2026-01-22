@@ -856,6 +856,7 @@
 
     window.addEventListener('message', (event) => {
       const data = safeParseMessageData(event.data);
+      console.log(data)
       if (!data) return;
 
       const action = String(data.action || '').toLowerCase();

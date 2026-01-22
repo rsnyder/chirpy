@@ -370,7 +370,7 @@ function repositionFloats({ root = document.body } = {}) {
     });
 }
 
-if (!isMobile) repositionFloats();
+// if (!isMobile) repositionFloats();
 
 /* ---------------------------------------------
  * Action links -> iframe postMessage
@@ -468,6 +468,10 @@ function addActionLinks({ root = document.body } = {}) {
         if (a.hasAttribute("href")) {
             a.setAttribute("data-href", parsed.href);
             a.removeAttribute("href");
+            a.setAttribute("data-action", action);
+            a.setAttribute("data-target", target);
+            a.setAttribute("data-label", parsed.label);
+            a.setAttribute("data-args", args);
         }
 
         a.classList.add("trigger");
@@ -476,9 +480,10 @@ function addActionLinks({ root = document.body } = {}) {
 
         a.addEventListener("click", (e) => {
             e.preventDefault();
-            const msg = { event: "action", action, text: parsed.label, args };
-            // Your iframe side expects JSON strings; keep compatibility
-            iframe.contentWindow?.postMessage(JSON.stringify(msg), "*");
+            const msg = { event: "action", action: e.target.dataset.action, text: e.target.dataset.label, args: [e.target.dataset.args] }
+            let target = document.querySelector(`.col2 [data-id="${e.target.dataset.target}"]`) || document.getElementById(e.target.dataset.target);
+            target.contentWindow?.postMessage(JSON.stringify(msg), "*");
+            console.log(target, msg)
         });
     }
 }
