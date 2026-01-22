@@ -11,6 +11,7 @@ script_includes:
 
 <script>
   // Add column mode toggle button to left sidebar
+  console.log('update sidebar');
   let sidebar = document.querySelector('div.sidebar-bottom');
   let modeToggle = document.createElement('a');
   modeToggle.id = 'col-mode-toggle';
@@ -25,6 +26,7 @@ script_includes:
   if (ghLink) {
     ghLink.replaceWith(modeToggle);
   }
+  console.log(modeToggle);
 </script>
 
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
@@ -241,7 +243,7 @@ script_includes:
 
   let mainWrapper = document.getElementById('main-wrapper');
   mainWrapper.classList.add('col1');
-  modeToggle.addEventListener('click', () => {
+  document.getElementById('col-mode-toggle')?.addEventListener('click', () => {
     if (mainWrapper.classList.contains('col2')) {
       mainWrapper.classList.remove('col2');
       mainWrapper.classList.add('col1');

@@ -241,7 +241,7 @@ function wrapAdjacentEmbedsAsTabs({
         return `Item ${idx + 1}`;
     }
 } = {}) {
-    // console.log('wrapAdjacentEmbedsAsTabs');
+    console.log('wrapAdjacentEmbedsAsTabs');
     const isIgnorableText = (n) => n.nodeType === Node.TEXT_NODE && n.nodeValue.trim() === "";
 
     const isEmbedItem = (n) =>
@@ -336,7 +336,7 @@ function wrapAdjacentEmbedsAsTabs({
  * ------------------------------------------- */
 
 function autoFloat({ root = document.body } = {}) {
-    //  console.log('autoFloat');
+    console.log('autoFloat');
     const embeds = Array.from(root.querySelectorAll('iframe, sl-tab-group')).reverse();
 
     embeds.forEach((embed) => {
@@ -892,7 +892,7 @@ function handleStepEnter(response) {
 }
 
 function init2col() {
-    // console.log('init2col')
+    console.log('init2col')
     els.article = qs(SELECTORS.article);
     els.header = qs(SELECTORS.header);
     els.viewer = qs(SELECTORS.viewer);
