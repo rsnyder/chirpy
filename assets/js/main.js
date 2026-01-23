@@ -760,7 +760,7 @@ const SELECTORS = {
     article: "article",
     header: "article > header",
     viewer: ".viewer",
-    step: ".col2 .post-content > p",
+    step: ".col2 .post-content > p, .col2 .post-content > blockquote",
 };
 
 const scroller = scrollama();
@@ -798,7 +798,10 @@ function setActive(el) {
 function findViewerSource(stepEl) {
     let toMatch = ['IFRAME', 'SL-TAB-GROUP'];
 
-    let node = stepEl?.nextElementSibling;
+    let node = stepEl?.previousElementSibling || null;
+    if (node?.classList.contains('right') || node?.classList.contains('left')) return node
+
+    node = stepEl?.nextElementSibling;
     if (node.nodeType === Node.ELEMENT_NODE && toMatch.includes(node.nodeName)) return node
 
     node = stepEl?.previousElementSibling || null;
@@ -912,7 +915,7 @@ function init2col() {
     scroller
         .setup({
             step: SELECTORS.step,
-            offset: 0.1,
+            offset: 0.08,
             debug: false,
         })
         .onStepEnter(handleStepEnter);
