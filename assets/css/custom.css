@@ -468,3 +468,7 @@ figure.iframe-wrapper figcaption {
 .post-content {
     font-size: 1.1rem;
 }
+
+[id$="-csv"] {
+    display: none;
+}
